@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Tool Name</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #4f46e5;
+      --color-primary-hover: #4338ca;
+      --color-bg: #f9fafb;
+      --color-surface: #ffffff;
+      --color-border: #e5e7eb;
+      --color-text: #111827;
+      --color-muted: #6b7280;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: var(--color-muted); font-size: 15px; }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* Drop zone */
+    .dropzone {
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .dropzone:hover,
+    .dropzone.dragover {
+      border-color: var(--color-primary);
+      background: #f5f3ff;
+    }
+
+    .dropzone input[type="file"] { display: none; }
+
+    .dropzone label {
+      cursor: pointer;
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    .dropzone p { color: var(--color-muted); font-size: 14px; margin-top: 6px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--color-primary); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--color-primary-hover); }
+    .btn-outline { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
+    .btn-outline:hover:not(:disabled) { background: var(--color-bg); }
+
+    /* Progress */
+    .progress-wrap { margin-top: 16px; display: none; }
+    .progress-bar { height: 6px; background: var(--color-border); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--color-primary); width: 0; transition: width 0.2s; }
+    .progress-text { font-size: 13px; color: var(--color-muted); margin-top: 6px; text-align: right; }
+
+    /* Output */
+    .output { display: none; }
+    .output-content { background: var(--color-bg); border-radius: var(--radius); padding: 16px; font-family: monospace; font-size: 13px; white-space: pre-wrap; max-height: 300px; overflow: auto; }
+
+    .actions { display: flex; gap: 10px; margin-top: 12px; }
+
+    /* Privacy badge */
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--color-muted);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      padding: 4px 10px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🛠️ Web Tool Name</h1>
+      <p class="subtitle">One-line description of what this tool does</p>
+      <div class="privacy-badge">🔒 Files never leave your browser</div>
+    </header>
+
+    <!-- Input Card -->
+    <div class="card">
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept=".txt,.json,.csv">
+        <div>
+          <p style="font-size: 32px; margin-bottom: 8px;">📄</p>
+          <p><label for="file-input">Click to choose a file</label> or drag it here</p>
+          <p>Supported: .txt, .json, .csv</p>
+        </div>
+      </div>
+
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p class="progress-text" id="progress-text">0%</p>
+      </div>
+    </div>
+
+    <!-- Output Card -->
+    <div class="card output" id="output-card">
+      <h2 style="font-size:16px; font-weight:600; margin-bottom:12px;">Result</h2>
+      <div class="output-content" id="output-content"></div>
+      <div class="actions">
+        <button class="btn btn-primary" id="download-btn">⬇ Download</button>
+        <button class="btn btn-outline" id="copy-btn">📋 Copy</button>
+        <button class="btn btn-outline" id="reset-btn">↩ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+    const progressWrap = document.getElementById('progress-wrap');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const outputCard = document.getElementById('output-card');
+    const outputContent = document.getElementById('output-content');
+
+    // --- Drag-and-drop ---
+    dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    // --- File handling ---
+    function handleFiles(files) {
+      if (!files.length) return;
+      const file = files[0];
+      const reader = new FileReader();
+
+      showProgress();
+      reader.onprogress = e => { if (e.lengthComputable) updateProgress(e.loaded / e.total); };
+      reader.onload = e => {
+        updateProgress(1);
+        const result = processFile(e.target.result, file.name);
+        showOutput(result, file.name);
+      };
+      reader.readAsText(file);
+    }
+
+    // --- YOUR LOGIC HERE ---
+    function processFile(content, filename) {
+      // Replace this with your actual processing logic
+      return `Processed: ${filename}\n\n${content.slice(0, 200)}...`;
+    }
+
+    // --- Progress ---
+    function showProgress() {
+      progressWrap.style.display = 'block';
+      updateProgress(0);
+    }
+
+    function updateProgress(ratio) {
+      const pct = Math.round(ratio * 100);
+      progressFill.style.width = `${pct}%`;
+      progressText.textContent = `${pct}%`;
+    }
+
+    // --- Output ---
+    function showOutput(result, filename) {
+      outputContent.textContent = result;
+      outputCard.style.display = 'block';
+      outputCard.scrollIntoView({ behavior: 'smooth' });
+
+      document.getElementById('download-btn').onclick = () => downloadResult(result, `output-${filename}`);
+      document.getElementById('copy-btn').onclick = () => {
+        navigator.clipboard.writeText(result);
+        document.getElementById('copy-btn').textContent = '✅ Copied!';
+        setTimeout(() => document.getElementById('copy-btn').textContent = '📋 Copy', 2000);
+      };
+      document.getElementById('reset-btn').onclick = () => {
+        outputCard.style.display = 'none';
+        progressWrap.style.display = 'none';
+        fileInput.value = '';
+      };
+    }
+
+    // --- Download ---
+    function downloadResult(data, filename, type = 'text/plain') {
+      const blob = new Blob([data], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

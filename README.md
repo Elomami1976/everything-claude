@@ -1,7 +1,8 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/v1.0.0-release-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/v1.1.0-release-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/github/license/Elomami1976/everything-claude?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/github/stars/Elomami1976/everything-claude?style=for-the-badge" alt="Stars">
+  <img src="https://github.com/Elomami1976/everything-claude/actions/workflows/ci.yml/badge.svg" alt="CI">
 </p>
 
 <h1 align="center">🧠 everything-claude</h1>
@@ -81,7 +82,7 @@ Your AI now has the rules, skills, and context to ship production code.
 
 ## ?? What's Inside
 
-**42 files** across 6 categories:
+**60+ files** across 8 categories:
 
 ```
 everything-claude/
@@ -91,6 +92,8 @@ everything-claude/
 +-- agents/        (3 files)  Specialized agent personas
 +-- hooks/         (1 file)   Lifecycle automation
 +-- docs/          (4 files)  Extended documentation
++-- templates/    (14 files)  Ready-to-copy project starters
++-- comparisons/   (3 files)  How this compares to other tools
 ```
 
 ### Rules
@@ -143,6 +146,24 @@ everything-claude/
 | `PostToolUse` | After file write | Auto-lint + format |
 | `SessionStart` | Session begins | Detect project type, load context |
 | `Stop` | Session ends | Generate summary, remind to commit |
+
+### Templates
+
+| Template | Description | Time to First Run |
+|---|---|---|
+| `chrome-extension/` | Manifest V3 popup + service worker | 5 minutes |
+| `web-tool/` | Privacy-first single-file tool | 2 minutes |
+| `saas/` | Next.js + Supabase + Stripe | 30 minutes |
+
+See [templates/README.md](templates/README.md) for usage.
+
+### Comparisons
+
+| File | Topic |
+|---|---|
+| [vs-cursor-native-rules.md](comparisons/vs-cursor-native-rules.md) | everything-claude vs Cursor `.cursorrules` |
+| [vs-github-copilot-instructions.md](comparisons/vs-github-copilot-instructions.md) | everything-claude vs Copilot instructions |
+| [vs-chatgpt-prompts.md](comparisons/vs-chatgpt-prompts.md) | everything-claude vs ChatGPT custom instructions |
 
 <br />
 
@@ -259,6 +280,9 @@ What are you building?
 | [Skills Reference](docs/SKILLS.md) | Complete skill docs + examples |
 | [Commands Reference](docs/COMMANDS.md) | Command usage, output formats, examples |
 | [Hooks Reference](docs/HOOKS.md) | Hook config + writing custom hooks |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute rules, skills, and templates |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
+| [ROADMAP.md](ROADMAP.md) | Planned features and direction |
 
 <br />
 
@@ -348,19 +372,19 @@ Yes, 100% free and MIT licensed. Use it commercially, fork it, modify it.
 
 ## ?? Contributing
 
-Contributions are welcome. Good first contributions:
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
+
+Good first contributions:
 
 - New language rules (Go, Rust, Swift, Kotlin)
 - Framework skills (Vue, Django, Rails)
-- Improved command output formats
+- New templates (React Native, Django, FastAPI)
 
 ```bash
-git checkout -b feature/go-rules
+git checkout -b feat/go-rules
 git commit -m "feat: add Go language rules"
-git push origin feature/go-rules
+git push origin feat/go-rules
 ```
-
-Please follow [Conventional Commits](https://www.conventionalcommits.org/).
 
 <br />
 

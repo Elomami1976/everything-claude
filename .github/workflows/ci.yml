@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
+      - name: Lint Markdown
+        run: |
+          markdownlint \
+            --ignore node_modules \
+            --ignore templates/saas \
+            --config .markdownlint.json \
+            "**/*.md"
+        continue-on-error: true
+
+      - name: Validate JSON files
+        run: |
+          for f in hooks/hooks.json package.json; do
+            echo "Checking $f..."
+            node -e "JSON.parse(require('fs').readFileSync('$f'))" && echo "  OK"
+          done
+
+      - name: Check for secrets
+        run: |
+          # Scan for common secret patterns
+          PATTERNS=(
+            "sk_live_"
+            "pk_live_"
+            "AIza"
+            "AAAA[A-Za-z0-9_-]{7}:"
+            "-----BEGIN RSA PRIVATE KEY-----"
+            "-----BEGIN OPENSSH PRIVATE KEY-----"
+          )
+          FOUND=0
+          for pattern in "${PATTERNS[@]}"; do
+            if grep -r --include="*.md" --include="*.json" --include="*.ts" --include="*.js" -l "$pattern" . 2>/dev/null | grep -v node_modules; then
+              echo "Potential secret found: $pattern"
+              FOUND=1
+            fi
+          done
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No secrets detected."
