@@ -1,246 +1,197 @@
-<![CDATA[<div align="center">
+<![CDATA[<p align="center">
+  <img src="https://img.shields.io/badge/v1.0.0-release-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/github/license/Elomami1976/everything-claude?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/stars/Elomami1976/everything-claude?style=for-the-badge" alt="Stars">
+</p>
 
-```
-███████╗██╗   ██╗███████╗██████╗ ██╗   ██╗████████╗██╗  ██╗██╗███╗   ██╗ ██████╗ 
-██╔════╝██║   ██║██╔════╝██╔══██╗╚██╗ ██╔╝╚══██╔══╝██║  ██║██║████╗  ██║██╔════╝ 
-█████╗  ██║   ██║█████╗  ██████╔╝ ╚████╔╝    ██║   ███████║██║██╔██╗ ██║██║  ███╗
-██╔══╝  ╚██╗ ██╔╝██╔══╝  ██╔══██╗  ╚██╔╝     ██║   ██╔══██║██║██║╚██╗██║██║   ██║
-███████╗ ╚████╔╝ ███████╗██║  ██║   ██║      ██║   ██║  ██║██║██║ ╚████║╚██████╔╝
-╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ 
-                           ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗
-                          ██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝
-                          ██║     ██║     ███████║██║   ██║██║  ██║█████╗  
-                          ██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝  
-                          ╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗
-                           ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
-```
+<h1 align="center">🧠 everything-claude</h1>
 
-# everything-claude
+<p align="center">
+  <strong>The Ultimate Agent Harness Performance Optimization Kit</strong><br>
+  Supercharge your AI coding agents with rules, skills, commands, and hooks.<br>
+  Built for <strong>Claude Code</strong> · <strong>Cursor</strong> · <strong>OpenCode</strong> · <strong>Codex</strong>
+</p>
 
-**The agent harness performance optimization system for Web Tools, Chrome Extensions, and SaaS — built for indie developers**
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Claude](https://img.shields.io/badge/Claude-Compatible-blueviolet)](https://claude.ai)
-[![Cursor](https://img.shields.io/badge/Cursor-Compatible-blue)](https://cursor.sh)
-[![OpenCode](https://img.shields.io/badge/OpenCode-Compatible-orange)](https://github.com/opencode)
-[![Codex](https://img.shields.io/badge/Codex-Compatible-yellow)](https://openai.com/codex)
-
-</div>
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-skills">Skills</a> •
+  <a href="#-commands">Commands</a> •
+  <a href="docs/INSTALL.md">Installation</a>
+</p>
 
 ---
 
-## 🚀 What is this?
+## ✨ Why everything-claude?
 
-**everything-claude** is a comprehensive performance optimization kit that supercharges your AI coding agents. It provides:
+Most AI coding agents are generic. They lack context about **your** stack, **your** patterns, and **your** workflows.
 
-- **📜 Rules** — Language-specific coding standards that keep your AI on track
-- **🛠️ Skills** — Reusable capabilities for building web tools, extensions, and SaaS products
-- **⚡ Commands** — Slash commands for common workflows (`/build`, `/review`, `/ship`, `/launch`)
-- **🤖 Agents** — Pre-configured agent personas for specialized tasks
-- **🪝 Hooks** — Automated behaviors triggered at key moments in your workflow
+**everything-claude** fixes this by giving your AI:
 
-Whether you're building a Chrome extension, launching a SaaS, or shipping a web tool, this kit gives your AI assistant the context and capabilities to help you ship faster.
+| Problem | Solution |
+|---------|----------|
+| AI forgets coding standards | **Rules** enforce consistency across sessions |
+| Repetitive setup for new projects | **Skills** provide ready-to-use capabilities |
+| Manual workflows slow you down | **Commands** automate common tasks |
+| Context switching between domains | **Agents** specialize in specific project types |
+| Missing quality checks | **Hooks** run automatically at key moments |
 
----
+<br>
 
-## 📦 Installation
+## 🚀 Quick Start
 
-### Method 1: Plugin Install (Recommended)
+### One-Line Install
 
 ```bash
-# Clone the repo
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/Elomami1976/everything-claude/main/install.sh | bash
+
+# Windows (PowerShell)
+irm https://raw.githubusercontent.com/Elomami1976/everything-claude/main/install.ps1 | iex
+```
+
+### Or Clone & Install
+
+```bash
 git clone https://github.com/Elomami1976/everything-claude.git
 cd everything-claude
-
-# Run the installer
-# macOS/Linux
-./install.sh
-
-# Windows
-.\install.ps1
+./install.sh    # or .\install.ps1 on Windows
 ```
 
-### Method 2: Manual Install
+### Try It Out
 
 ```bash
-# Copy rules to your home directory
-cp -r rules/ ~/.claude/rules/
-
-# Copy skills
-cp -r skills/ ~/.claude/skills/
-
-# Copy commands
-cp -r commands/ ~/.claude/commands/
-
-# Copy agents
-cp -r agents/ ~/.claude/agents/
-```
-
-### Method 3: Per-Project
-
-Just clone this repo into your project and reference files directly in your prompts.
-
----
-
-## ⚡ Quick Start
-
-After installation, try these commands in your AI assistant:
-
-```
-# Build a new project
-/build A Chrome extension that highlights all prices on Amazon and shows a price history chart
-
-# Review your code
-/review src/background.js
-
-# Security audit
-/audit
-
-# Plan a feature
-/plan Add Stripe subscription with monthly and yearly plans
-
-# Pre-launch checklist
+/build A Chrome extension that blocks social media during work hours
+/review src/main.ts
 /ship
-
-# Generate Product Hunt launch kit
-/launch
 ```
 
----
+<br>
 
-## 🛠️ Skills
+## 🎯 Features
 
-| Skill | Description | Use Case |
-|-------|-------------|----------|
-| [web-tool-builder](skills/web-tool-builder.md) | Build privacy-first browser tools | PDF tools, converters, text utilities |
-| [chrome-extension-builder](skills/chrome-extension-builder.md) | Create Manifest V3 Chrome extensions | Productivity tools, AI assistants, scrapers |
-| [saas-builder](skills/saas-builder.md) | Full SaaS product scaffolding | Subscription apps, web services |
-| [api-connector](skills/api-connector.md) | Integrate third-party APIs | Payment, auth, analytics |
-| [code-review](skills/code-review.md) | Comprehensive code reviews | PR reviews, refactoring |
-| [security-audit](skills/security-audit.md) | Security vulnerability scanning | Launch prep, compliance |
-| [seo-optimizer](skills/seo-optimizer.md) | SEO and GEO optimization | Landing pages, web apps |
-| [product-hunt-launch](skills/product-hunt-launch.md) | Product Hunt launch preparation | Marketing, launches |
-| [monetization-planner](skills/monetization-planner.md) | Revenue strategy planning | Pricing, tiers, conversion |
+### 📜 Rules — Coding Standards That Stick
 
----
+Language-specific rules that keep your AI consistent:
 
-## ⚡ Commands
+```
+rules/
+├── common/           # Security, git, documentation
+├── javascript/       # Modern JS, Chrome extensions, SaaS
+├── typescript/       # Type safety, React patterns
+└── python/           # FastAPI, scripts, type hints
+```
 
-| Command | Input | Output |
-|---------|-------|--------|
-| `/build <description>` | Natural language product description | Full build prompt with tech stack, file structure, steps |
-| `/review <file>` | File path or PR link | Issues by severity, suggestions, verdict |
-| `/audit` | (current project) | Security report: secrets, XSS, CORS, deps |
-| `/plan <feature>` | Feature request | Implementation plan, complexity, risks |
-| `/ship` | (current project) | Pre-launch checklist with pass/fail |
-| `/launch` | (current project) | Product Hunt kit: tagline, description, social posts |
+### 🛠️ Skills — Capabilities On Demand
 
----
+9 specialized skills for different domains:
 
-## 🤖 Agents
+| Skill | What It Does |
+|-------|--------------|
+| **web-tool-builder** | Privacy-first single-HTML tools |
+| **chrome-extension-builder** | Manifest V3 + BYOK monetization |
+| **saas-builder** | Next.js + Supabase + Stripe stack |
+| **api-connector** | Third-party API integration |
+| **code-review** | Severity-based code review |
+| **security-audit** | Vulnerability scanning |
+| **seo-optimizer** | SEO + GEO for AI search |
+| **product-hunt-launch** | Complete launch kit |
+| **monetization-planner** | Pricing strategy |
 
-| Agent | Purpose |
-|-------|---------|
-| [chrome-ext-agent](agents/chrome-ext-agent.md) | End-to-end Chrome extension builder |
-| [saas-agent](agents/saas-agent.md) | Full SaaS product scaffolder |
-| [web-tool-agent](agents/web-tool-agent.md) | Single-file web tool creator |
+### ⚡ Commands — Slash Your Workflow
 
----
+| Command | What You Get |
+|---------|--------------|
+| `/build <idea>` | Full project scaffold with tech stack |
+| `/review <file>` | Issues by severity + fixes |
+| `/audit` | Security vulnerabilities + fixes |
+| `/plan <feature>` | Implementation plan + risks |
+| `/ship` | Pre-launch checklist |
+| `/launch` | Product Hunt launch kit |
+
+### 🤖 Agents — Specialized Personas
+
+| Agent | Specialization |
+|-------|----------------|
+| **chrome-ext-agent** | Chrome extensions with BYOK monetization |
+| **saas-agent** | Full-stack SaaS with auth + payments |
+| **web-tool-agent** | Privacy-first browser tools |
+
+### 🪝 Hooks — Automated Quality
+
+```json
+{
+  "PreToolUse": "Block hardcoded secrets",
+  "PostToolUse": "Auto-format code",
+  "SessionStart": "Load project context",
+  "Stop": "Generate session summary"
+}
+```
+
+<br>
 
 ## 📁 Project Structure
 
 ```
 everything-claude/
-├── rules/                 # Coding standards by language
-│   ├── common/           # Universal rules
-│   ├── javascript/       # JS-specific rules
-│   ├── python/           # Python-specific rules
-│   └── typescript/       # TS-specific rules
-├── skills/               # Reusable capabilities
-├── commands/            # Slash command definitions
-├── agents/              # Agent configurations
-├── hooks/               # Automated behaviors
-└── docs/                # Documentation
+├── rules/                    # Coding standards
+│   ├── common/              # Universal: security, git, docs
+│   ├── javascript/          # JS: general, extensions, SaaS
+│   ├── typescript/          # TS: general, React
+│   └── python/              # Python: general, FastAPI, scripts
+├── skills/                   # 9 capability modules
+├── commands/                 # 6 slash commands
+├── agents/                   # 3 specialized agents
+├── hooks/                    # Lifecycle automation
+└── docs/                     # Extended documentation
 ```
 
----
+<br>
 
-## 🔧 Configuration
+## 📖 Documentation
 
-### Customizing Rules
+| Doc | Description |
+|-----|-------------|
+| [Installation Guide](docs/INSTALL.md) | All installation methods |
+| [Skills Reference](docs/SKILLS.md) | Complete skill documentation |
+| [Commands Reference](docs/COMMANDS.md) | Command usage and examples |
+| [Hooks Reference](docs/HOOKS.md) | Hook configuration |
 
-Edit any rule file in `rules/` to match your preferences:
-
-```markdown
-<!-- rules/javascript/general.md -->
-# JavaScript Rules
-
-- Always use `const` over `let` unless reassignment is needed
-- Prefer async/await over raw promises
-- Use early returns to reduce nesting
-```
-
-### Creating Custom Skills
-
-Add new skills to `skills/`:
-
-```markdown
-<!-- skills/my-custom-skill.md -->
-# My Custom Skill
-
-## When to Use
-Use this skill when building [specific use case].
-
-## How It Works
-1. Step one
-2. Step two
-3. Step three
-
-## Example Output
-[Show what the output looks like]
-```
-
----
+<br>
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how:
+We welcome contributions! See our [contribution guide](CONTRIBUTING.md) for details.
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-skill`
-3. Commit your changes: `git commit -m 'feat: add amazing skill'`
-4. Push to the branch: `git push origin feature/amazing-skill`
-5. Open a Pull Request
+```bash
+# Fork, clone, branch
+git checkout -b feature/amazing-skill
 
-Please follow [Conventional Commits](https://www.conventionalcommits.org/) for commit messages.
+# Make changes, commit with conventional commits
+git commit -m "feat: add amazing skill"
 
-### Ideas for Contributions
+# Push and open PR
+git push origin feature/amazing-skill
+```
 
-- New language rules (Go, Rust, etc.)
-- Additional skills for specific frameworks
-- Improved commands with better outputs
-- Documentation improvements
-- Bug fixes
-
----
+<br>
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE) for details.
+
+<br>
 
 ---
 
-## ⭐ Star History
+<p align="center">
+  <strong>Built for indie developers who ship fast.</strong><br><br>
+  <a href="https://github.com/Elomami1976/everything-claude/issues">Report Bug</a> •
+  <a href="https://github.com/Elomami1976/everything-claude/issues">Request Feature</a> •
+  <a href="https://github.com/Elomami1976/everything-claude/discussions">Discussions</a>
+</p>
 
-If this project helps you ship faster, consider giving it a star!
-
----
-
-<div align="center">
-
-**Built with ❤️ for indie developers by the community**
-
-[Report Bug](https://github.com/Elomami1976/everything-claude/issues) · [Request Feature](https://github.com/Elomami1976/everything-claude/issues) · [Discussions](https://github.com/Elomami1976/everything-claude/discussions)
-
-</div>
+<p align="center">
+  <sub>If this helps you ship faster, consider giving it a ⭐</sub>
+</p>
 ]]>
