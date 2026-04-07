@@ -1,339 +1,141 @@
-<![CDATA[# Product Hunt Launch Skill
+# Product Hunt Launch Skill
 
-Prepare and execute a successful Product Hunt launch to maximize visibility and downloads.
+Prepare and execute a Product Hunt launch to maximize upvotes, visibility, and sign-ups.
 
 ## When to Use
 
 Use this skill when:
-- Launching a new product
-- Releasing major version update
-- Expanding to new market
-- Building initial user base
-- Generating press coverage
+- Launching a new product for the first time
+- Releasing a major version update worth its own launch
+- Expanding into a new target market
+- Building an initial user base from zero
+- Generating press and community awareness
 
 ---
 
-## How It Works
+## Launch Timeline
 
-### Launch Success Framework
-
-```
-┌────────────────────────────────────────────────────────┐
-│                  PRODUCT HUNT LAUNCH                    │
-├────────────────────────────────────────────────────────┤
-│                                                         │
-│  PRE-LAUNCH (2-4 weeks)                                │
-│  ├─ Build hunter network                               │
-│  ├─ Prepare assets                                     │
-│  └─ Warm up audience                                   │
-│                                                         │
-│  LAUNCH DAY                                            │
-│  ├─ Post at optimal time                               │
-│  ├─ Engage comments                                    │
-│  └─ Social media push                                  │
-│                                                         │
-│  POST-LAUNCH                                           │
-│  ├─ Thank supporters                                   │
-│  ├─ Follow up with leads                              │
-│  └─ Leverage momentum                                  │
-│                                                         │
-└────────────────────────────────────────────────────────┘
-```
+| Phase | When | Key Actions |
+|---|---|---|
+| **Prep** | 4 weeks out | Build assets, write copy, warm up network |
+| **Outreach** | 2 weeks out | Contact hunters, email list, community teasing |
+| **Launch day** | Day of | Post at 12:01 AM PT, engage all day |
+| **Follow-up** | 1–3 days after | Thank supporters, convert leads, leverage press |
 
 ---
 
-## Pre-Launch Checklist (2-4 Weeks Before)
+## Step 1: Pre-Launch Checklist (4 weeks out)
 
-### 1. Product Readiness
-- [ ] Product works flawlessly
-- [ ] Landing page optimized
-- [ ] Signup/download flow smooth
-- [ ] Onboarding clear
-- [ ] Support system ready
-- [ ] Analytics tracking set up
+**Product:**
+- [ ] Core user flow works flawlessly — no broken states
+- [ ] Mobile-responsive or responsive at every breakpoint
+- [ ] Signup/onboarding completes in under 2 minutes
+- [ ] Fast load time (under 3 seconds)
 
-### 2. Hunter Outreach
+**Landing page:**
+- [ ] Headline states the benefit in 8 words or fewer
+- [ ] 30-second explainer video or animated GIF above the fold
+- [ ] Social proof (testimonials, screenshots, usage numbers)
+- [ ] Clear CTA ("Try free", "Get started", "Download")
 
-**Find a hunter:**
-- Top hunters list: producthunt.com/leaderboard
-- Reach out via Twitter DM or email
-- Provide: product demo, key differentiators, launch date
-
-**Outreach Template:**
-```
-Subject: [Product Name] - Would love your hunt 🎯
-
-Hi [Hunter Name],
-
-I've been following your hunts and loved [specific hunt]. 
-
-I'm launching [Product Name] - [one-liner]. It's [key differentiator].
-
-Would you be interested in hunting it on [date]?
-
-Here's a quick demo: [Loom link]
-
-Thanks!
-[Your Name]
-```
-
-### 3. Asset Preparation
-
-**Required:**
-- [ ] Logo (240 x 240px, PNG/GIF)
-- [ ] Gallery images (1270 x 760px, up to 8)
-- [ ] Thumbnail GIF/Video (recommended)
-- [ ] Product video (optional but impactful)
-
-**Gallery Image Strategy:**
-1. Hero shot with value proposition
-2. Key feature #1
-3. Key feature #2
-4. Key feature #3
-5. Before/After or comparison
-6. Social proof/testimonials
-7. Pricing (if applicable)
-8. CTA/Download
+**Assets to create:**
+- [ ] 240x240 product logo (transparent background)
+- [ ] 1270x760 gallery images (3–5 screenshots)
+- [ ] 60-second product demo video
+- [ ] Tagline (60 characters max)
+- [ ] Product description (260 characters)
 
 ---
 
-## Launch Day Kit
+## Step 2: Hunter Network (2 weeks out)
 
-### Tagline (60 chars max)
-**Formula:** `[What it does] for [who]`
+A well-connected hunter amplifies your launch to their followers.
 
-**Examples:**
-- ✅ "Notion for your terminal" (20 chars)
-- ✅ "AI-powered code reviews in seconds" (35 chars)
-- ✅ "Build web tools without code" (29 chars)
-- ❌ "The best productivity app ever made for..." (too long)
-
-### Short Description (260 chars max)
-**Formula:** `[What it is] that [key benefit]. [How it's different]. [Call to action].`
-
-**Example:**
-```
-A privacy-first PDF toolkit that runs entirely in your browser. 
-No uploads, no tracking, no subscriptions. Merge, split, compress, 
-and convert PDFs instantly. 100% free forever.
-```
-
-### First Comment (Maker's Comment)
-This is CRITICAL — it humanizes your launch.
-
-**Template:**
-```
-Hey Product Hunt! 👋
-
-I'm [Name], the maker of [Product].
-
-**Why I built this:**
-[Personal story - 2-3 sentences about the problem you faced]
-
-**What makes it different:**
-- [Differentiator 1]
-- [Differentiator 2]
-- [Differentiator 3]
-
-**We're launching with:**
-- [Feature or offer for PH users]
-
-Would love your feedback! Ask me anything 👇
-
-[Optional: Special PH offer/discount code]
-```
-
-**Real Example:**
-```
-Hey Product Hunt! 👋
-
-I'm Alex, and I built PDFBuddy because I was tired of sketchy PDF tools 
-that upload your files who-knows-where.
-
-PDFBuddy runs 100% in your browser. Your files never leave your device. 
-No signup required, no watermarks, no "free tier" limits.
-
-What makes it different:
-✅ Privacy-first: Everything happens locally
-✅ Instant: No upload/download waiting
-✅ Free forever: No premium, no ads
-
-For the PH launch, I've added a new feature: batch processing 
-up to 50 files at once!
-
-Would love your feedback — what PDF features do you wish existed? 👇
-```
+- Find hunters with 1,000+ followers in your product category
+- Reach out personally — explain the product, share the demo
+- Join the Product Hunt community: upvote others, comment genuinely
+- Build a list of 50–200 supporters to notify on launch day
+- Don't ask for upvotes — ask people to "check it out if it looks interesting"
 
 ---
 
-## Social Media Templates
+## Step 3: Listing Copy
 
-### Twitter/X Thread
+**Tagline formula:** `[Product] is the [category] that [benefit]`
 
-**Tweet 1:**
-```
-🚀 We just launched [Product] on Product Hunt!
+Examples:
+- "The AI writing tool that edits like a pro editor"
+- "The Chrome extension that blocks distractions during deep work"
 
-[One line value prop]
+**Description structure (260 characters):**
+1. What it does (one sentence)
+2. Who it's for (one phrase)
+3. Key differentiator (one phrase)
 
-Please support us with an upvote 🙏
-
-🔗 [Product Hunt link]
-
-🧵 Here's the story...
-```
-
-**Tweet 2:**
-```
-The problem:
-[Describe pain point most people relate to]
-[Make it vivid and specific]
-```
-
-**Tweet 3:**
-```
-The solution:
-[Product] does [X] in [simple way]
-
-No [common pain point]
-No [common pain point]
-Just [benefit]
-
-[GIF or image]
-```
-
-**Tweet 4:**
-```
-What makes us different:
-✅ [Differentiator]
-✅ [Differentiator]
-✅ [Differentiator]
-```
-
-**Tweet 5:**
-```
-Try it free: [link]
-Support us on PH: [link]
-
-RT appreciated! 🙏
-```
-
-### LinkedIn Post
-```
-🎉 Excited to share: We just launched [Product] on Product Hunt!
-
-After [time] of work, I'm thrilled to put this out there.
-
-[Product] helps [audience] [achieve outcome] by [how].
-
-What makes it special:
-• [Key benefit 1]
-• [Key benefit 2]
-• [Key benefit 3]
-
-If you have 30 seconds, I'd really appreciate an upvote: [link]
-
-Thank you to everyone who helped along the way! 🙌
-
-#ProductHunt #Launch #[Relevant Hashtag]
-```
-
-### Reddit Post (relevant subreddits)
-```
-Title: I built [Product] - [value prop] [feedback wanted]
-
-Hey r/[subreddit]!
-
-I just launched [Product], a [what it is] that [key benefit].
-
-[2-3 sentences about why/how you built it]
-
-It's [pricing model - free/paid] and you can try it here: [link]
-
-What features would make this more useful for you?
-
-(Also on Product Hunt today if you want to support: [link])
-```
+**First comment (post this yourself, day of launch):**
+- Story behind building it
+- Who it's for
+- Link to specific onboarding path
+- Invite genuine feedback
 
 ---
 
-## Launch Day Timeline
+## Step 4: Launch Day Execution
 
-| Time (PST) | Action |
-|------------|--------|
-| 12:01 AM | Launch goes live |
-| 7:00 AM | Post Twitter thread |
-| 7:30 AM | Share on LinkedIn |
-| 8:00 AM | Email your list |
-| 8:00 AM | Post in relevant communities |
-| 9:00 AM | Check/respond to comments |
-| 12:00 PM | Update social with progress |
-| 3:00 PM | Second push to network |
-| 6:00 PM | Thank early supporters |
-| 11:59 PM | Day ends, celebrate! |
+| Time (PT) | Action |
+|---|---|
+| 12:01 AM | Post the product |
+| 12:05 AM | Post first comment |
+| 6:00 AM | Email your list — "We're live on Product Hunt" |
+| 8:00 AM | Post on Twitter/X, LinkedIn, relevant communities |
+| Throughout | Respond to every comment within 1 hour |
+| 6:00 PM | Second wave of social posts |
+| 11:00 PM | Thank-you post on social |
+
+**Comment engagement rules:**
+- Reply to every comment (positive or critical) same day
+- Be specific — not just "Thanks!"
+- Answer feature questions with your roadmap
 
 ---
 
-## Ethical Upvote Strategy
+## Step 5: Post-Launch
 
-**DO:**
-- Ask your network (personal asks work best)
-- Post in communities you're genuinely part of
-- Make it easy (provide direct link)
-- Thank people who support
+**Within 24 hours:**
+- DM every supporter who upvoted and left a comment
+- Send a recap email to your list with results + next steps
+- Reach out to anyone who gave detailed feedback
 
-**DON'T:**
-- Buy upvotes (you will be caught)
-- Use upvote pods/rings
-- Create fake accounts
-- Spam communities you don't belong to
+**Within 1 week:**
+- Write a launch post-mortem (numbers, lessons, what worked)
+- Pitch to tech press with your PH ranking as social proof
+- Add "As Seen on Product Hunt" badge to landing page
 
-**Network Activation Email:**
+---
+
+## Email Template: Launch Day
+
 ```
-Subject: 🚀 I need your help (takes 60 seconds)
+Subject: We're live on Product Hunt today
 
 Hey [Name],
 
-Today's the day — [Product] just launched on Product Hunt!
+[Product] just launched on Product Hunt — it would mean a lot if you took a look.
 
-If you have a minute, would you:
-1. Go to [link]
-2. Click upvote (you'll need a free account)
-3. Maybe drop a comment?
+[One sentence on what it does + link to PH listing]
 
-It would mean the world to me!
+If it looks interesting, any engagement (upvote, comment, share) helps.
 
-Thanks,
-[Your Name]
-
-P.S. Here's why I built this: [quick context]
+Thank you,
+[Your name]
 ```
 
 ---
 
-## Post-Launch
+## Output Deliverables
 
-### Day 1 After
-- [ ] Thank everyone who supported
-- [ ] Share results (badges, ranking)
-- [ ] Follow up with qualified leads
-- [ ] Update product with early feedback
-
-### Week 1 After
-- [ ] Write launch retrospective
-- [ ] Reach out to press with "as seen on Product Hunt"
-- [ ] Add PH badge to website
-- [ ] Set up nurture sequence for new signups
-
----
-
-## Output
-
-Deliverables:
-1. Tagline options (3-5)
-2. Short description
-3. Maker's first comment
-4. Social media post templates
-5. Launch day schedule
-6. Outreach email templates
-]]>
+1. Product Hunt listing copy (tagline + description + first comment)
+2. 5 gallery image captions
+3. 3 social media posts (Twitter/X, LinkedIn, community)
+4. Launch day email to supporters
+5. 5-day post-launch follow-up sequence

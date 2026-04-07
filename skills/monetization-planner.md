@@ -1,339 +1,122 @@
-<![CDATA[# Monetization Planner Skill
+# Monetization Planner Skill
 
 Design revenue strategies and pricing models that maximize conversion and lifetime value.
 
 ## When to Use
 
 Use this skill when:
-- Launching a new product (choose pricing model)
+- Choosing a pricing model for a new product
 - Converting free users to paid
-- Optimizing existing pricing
-- Adding payment tiers
-- Planning revenue targets
+- Designing tier structure and feature limits
 - Reducing churn
+- Optimizing upgrade conversion
+- Planning revenue projections
 
 ---
 
-## How It Works
+## Step 1: Choose a Pricing Model
 
-### Monetization Framework
+Select the model that fits how your product delivers value:
 
-```
-┌────────────────────────────────────────────────────────┐
-│               MONETIZATION PLANNING                     │
-├────────────────────────────────────────────────────────┤
-│                                                         │
-│  1. MODEL SELECTION    → How you charge                │
-│  2. PRICING STRATEGY   → What you charge               │
-│  3. TIER DESIGN        → What each level gets          │
-│  4. CONVERSION TRIGGERS→ When users upgrade            │
-│  5. RETENTION          → How you keep them             │
-│                                                         │
-└────────────────────────────────────────────────────────┘
-```
+| Model | Best For | Conversion Style |
+|---|---|---|
+| **Freemium** | Viral products with broad top of funnel | Convert on limit hit |
+| **Free Trial** | High-value B2B tools | Convert on trial expiry |
+| **One-Time** | Simple tools, offline use | Single purchase |
+| **Subscription** | Ongoing value delivery | Monthly or annual |
+| **Usage-Based** | APIs, infrastructure | Pay per use |
+| **Lifetime Deal** | Early traction + capital | Launch event |
 
----
-
-## Step 1: Choose Your Model
-
-### Model Comparison
-
-| Model | Best For | Pros | Cons |
-|-------|----------|------|------|
-| **Freemium** | Products with viral potential | User acquisition, testing | Hard to convert |
-| **Free Trial** | High-value B2B products | Qualified leads | Time pressure |
-| **One-Time** | Simple tools, downloads | Simple, no churn | No recurring revenue |
-| **Subscription** | Ongoing value delivery | Recurring revenue | Need constant value |
-| **Usage-Based** | APIs, infrastructure | Fair pricing | Unpredictable revenue |
-| **Lifetime Deal** | Early traction | Quick capital | Caps long-term revenue |
-
-### Decision Matrix
-
-```
-Do users need it repeatedly?
-├─ YES → Is value proportional to usage?
-│        ├─ YES → Usage-based pricing
-│        └─ NO → Subscription
-│
-└─ NO → Is it a tool or content?
-         ├─ TOOL → One-time purchase
-         └─ CONTENT → One-time or subscription bundle
-```
+**Decision shortcut:**
+- Repeated use + proportional value → Usage-based
+- Repeated use + flat value → Subscription
+- Single purchase → One-time
+- Need large top of funnel → Freemium or free trial
 
 ---
 
-## Step 2: Pricing Strategy
+## Step 2: Set Price Points
 
-### Price Point Psychology
+Anchor to the value created, not your costs.
 
-```
-$0-$9       → Impulse purchase, credit card swipe
-$10-$49     → Consider it, compare to coffee/lunch
-$50-$199    → Sleep on it, discuss with partner
-$200-$999   → Budget decision, business expense
-$1,000+     → Committee decision, sales involvement
-```
+| Price Range | Buyer Psychology |
+|---|---|
+| $0–$9 | Impulse — no deliberation |
+| $10–$49 | Low consideration — compares to lunch/coffee |
+| $50–$199 | Moderate consideration — sleeps on it |
+| $200–$999 | Budget decision — business expense |
+| $1,000+ | Committee decision — needs sales |
 
-### Pricing Methods
-
-**1. Value-Based Pricing:**
-```
-If your tool saves 5 hours/month
-And user's time is worth $50/hour
-Value created = $250/month
-Price at 10-20% of value = $25-50/month
-```
-
-**2. Competitor-Based:**
-```
-Competitor A: $29/month
-Competitor B: $49/month
-Your price: $39/month (position in middle)
-Or: $19/month (disrupt on price)
-Or: $99/month (premium positioning)
-```
-
-**3. Cost-Plus:**
-```
-Your costs: $5/user/month
-Target margin: 80%
-Price: $25/month
-```
+**Value-based formula:**
+If your tool saves 5 hours/month at $50/hour = $250 value. Price at 10–20% of value created = $25–50/month.
 
 ---
 
-## Step 3: Tier Design
+## Step 3: Design Tiers
 
-### Classic 3-Tier Structure
+Use a classic 3-tier structure. Each tier should have a clear persona.
 
-```
-╔══════════════════════════════════════════════════════════╗
-║                    PRICING PLANS                          ║
-╠═══════════════════╦═══════════════════╦══════════════════╣
-║       FREE        ║        PRO        ║    ENTERPRISE    ║
-╠═══════════════════╬═══════════════════╬══════════════════╣
-║   Basic features  ║  All features     ║  Everything +    ║
-║   Limited usage   ║  Higher limits    ║  Unlimited       ║
-║   Community       ║  Email support    ║  Priority support║
-║                   ║  API access       ║  SLA + Dedicated ║
-╠═══════════════════╬═══════════════════╬══════════════════╣
-║       $0          ║    $19/month      ║   Contact us     ║
-║                   ║   →Most Popular←  ║                  ║
-╚═══════════════════╩═══════════════════╩══════════════════╝
-```
+| Tier | Users | Features | Limits | Price |
+|---|---|---|---|---|
+| **Free** | Evaluators, hobbyists | Core features only | Low limits | $0 |
+| **Pro** | Individual power users | Everything + higher limits | Generous | $19–49/mo |
+| **Team / Business** | Teams, agencies | All Pro + collaboration + support | Seat-based | $99–299/mo |
 
-### Tier Differentiation Strategies
-
-**1. Feature-Based:**
-```javascript
-const TIERS = {
-  free: {
-    features: ['basic_editor', 'export_pdf'],
-    limits: { projects: 3 }
-  },
-  pro: {
-    features: ['basic_editor', 'export_pdf', 'export_all', 'templates', 'ai_assist'],
-    limits: { projects: 50 }
-  },
-  enterprise: {
-    features: ['*'], // Everything
-    limits: { projects: -1 } // Unlimited
-  }
-};
-```
-
-**2. Usage-Based:**
-```javascript
-const TIERS = {
-  starter: { 
-    price: 9,
-    apiCalls: 1000,
-    storage: '1GB'
-  },
-  growth: {
-    price: 49,
-    apiCalls: 10000,
-    storage: '10GB'
-  },
-  scale: {
-    price: 199,
-    apiCalls: 100000,
-    storage: '100GB'
-  }
-};
-```
-
-**3. Seat-Based:**
-```javascript
-const TIERS = {
-  solo: { price: 15, seats: 1 },
-  team: { price: 49, seats: 5 }, // $9.80/seat
-  business: { price: 199, seats: 25 } // $7.96/seat - volume discount
-};
-```
+**Feature allocation rules:**
+- Put features in Free that create habit, not revenue
+- Gate features that save time or unlock scale in Pro
+- Never gate features that users need to evaluate core value
 
 ---
 
-## Step 4: Conversion Triggers
+## Step 4: Design Upgrade Triggers
 
-### When to Show Upgrade Prompts
+Show upgrade prompts at high-value moments — not randomly.
 
-```javascript
-const UPGRADE_TRIGGERS = {
-  // Usage limits
-  hitUsageLimit: {
-    message: "You've used 100% of your free quota",
-    cta: "Upgrade for 10x more"
-  },
-  
-  // Feature gates
-  premiumFeatureClick: {
-    message: "AI Assistant is a Pro feature",
-    cta: "Start 14-day free trial"
-  },
-  
-  // Time-based
-  freeTrialEnding: {
-    message: "Your trial ends in 3 days",
-    cta: "Subscribe to keep access"
-  },
-  
-  // Value moments
-  successMilestone: {
-    message: "You've saved 10 hours this month!",
-    cta: "Go Pro and save even more"
-  },
-  
-  // Social
-  teamGrowth: {
-    message: "Invite your team to collaborate",
-    cta: "Upgrade to Team plan"
-  }
-};
-```
+| Trigger | Message Pattern |
+|---|---|
+| Hit usage limit | "You've used 100% of your free quota. Upgrade for 10x more." |
+| Click gated feature | "[Feature] is available on Pro. Start your 14-day free trial." |
+| Trial expiring | "Your trial ends in 3 days. Subscribe to keep access." |
+| Achievement milestone | "You've saved 10 hours this month! Go Pro to save even more." |
+| Invite team | "Invite your team — upgrade to the Team plan." |
 
-### Upgrade Flow Best Practices
-
-```
-1. SHOW VALUE FIRST
-   ├─ Let users experience core value
-   └─ Gate expansion, not essentials
-
-2. MAKE IT REVERSIBLE
-   ├─ "Try Pro free for 14 days"
-   └─ "Cancel anytime"
-
-3. REDUCE FRICTION
-   ├─ One-click upgrade
-   ├─ Save payment info
-   └─ Instant access (no waiting)
-
-4. CLEAR COMPARISON
-   ├─ Show what they get
-   ├─ Show what they pay
-   └─ Highlight best value
-```
+**Best practices:**
+- Show value received before asking for money
+- Make upgrade reversible: "Cancel anytime" and "Try free for 14 days"
+- One-click upgrade — no friction at checkout
 
 ---
 
 ## Step 5: Retention Strategy
 
-### Prevent Churn Before It Happens
+Prevent churn before it happens.
 
-```javascript
-const RETENTION_TRIGGERS = {
-  // Inactivity warning
-  noLoginIn14Days: {
-    action: 'send_win_back_email',
-    message: "We miss you! Here's what's new..."
-  },
-  
-  // Failed payment
-  paymentFailed: {
-    action: 'email_sequence',
-    steps: ['retry_1day', 'retry_3days', 'final_warning', 'downgrade']
-  },
-  
-  // Cancel intent
-  cancelButtonClick: {
-    action: 'show_save_flow',
-    offers: ['pause_subscription', 'downgrade_tier', 'discount_offer']
-  },
-  
-  // Low usage
-  lowUsageAlert: {
-    action: 'send_tips_email',
-    message: "Get more from your subscription..."
-  }
-};
-```
+| Signal | Action |
+|---|---|
+| No login in 14 days | Win-back email: "Here's what's new..." |
+| Payment failed | 3-email dunning sequence, then downgrade |
+| Low feature usage | Tips email: "Get more from your subscription" |
+| Cancel button clicked | Save flow: ask why, offer pause/downgrade/discount |
 
-### Cancellation Save Flow
+**Cancellation save flow:** Ask why → Offer matching solution → Make cancel easy (no guilt) → Win-back email in 30 days.
+
+---
+
+## Revenue Projection Template
 
 ```
-User clicks "Cancel" →
-├─ Step 1: Ask why
-│   - Too expensive
-│   - Missing feature
-│   - Not using it
-│   - Found alternative
-│
-├─ Step 2: Offer solution
-│   - Too expensive → Offer discount or downgrade
-│   - Missing feature → Show roadmap or workaround
-│   - Not using it → Offer pause instead
-│   - Alternative → Offer price match or differentiator
-│
-├─ Step 3: Make it easy (don't block exit!)
-│   - Clear cancel button
-│   - No guilt tripping
-│   - Thank them
-│
-└─ Step 4: Post-cancel
-    - Win-back email in 30 days
-    - Keep data (retention period)
-    - Easy reactivation
+Month 1:  1,000 free users × 5% conversion = 50 paid × $25 ARPU = $1,250 MRR
+Month 6:  10,000 free users × 5% = 500 paid (net churn) × $28 ARPU = $14,000 MRR
+Month 12: 50,000 free users × 5% = 2,000 paid × $32 ARPU = $64,000 MRR ($768K ARR)
 ```
 
 ---
 
-## Revenue Projections Template
+## Output Deliverables
 
-```
-MONTHLY RECURRING REVENUE (MRR) PROJECTION
-
-Month 1:
-├─ Free users: 1,000
-├─ Free→Paid conversion: 5%
-├─ Paid users: 50
-├─ ARPU: $25
-└─ MRR: $1,250
-
-Month 6:
-├─ Free users: 10,000
-├─ Free→Paid conversion: 5%
-├─ Paid users: 500 (some churned, new converts)
-├─ ARPU: $28 (upsells)
-├─ Monthly churn: 5%
-└─ MRR: $14,000
-
-Month 12:
-├─ Free users: 50,000
-├─ Paid users: 2,000
-├─ ARPU: $32
-└─ MRR: $64,000
-└─ ARR: $768,000
-```
-
----
-
-## Output
-
-Deliverables:
-1. Recommended pricing model
-2. tier structure with pricing
-3. Feature allocation per tier
-4. Upgrade trigger specifications
-5. Retention flow designs
-6. Revenue projections
-]]>
+1. Recommended pricing model with rationale
+2. Tier structure with price points and feature list
+3. Upgrade trigger specifications
+4. Cancellation save flow design
+5. 12-month MRR projection

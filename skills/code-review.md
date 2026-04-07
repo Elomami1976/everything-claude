@@ -1,273 +1,119 @@
-<![CDATA[# Code Review Skill
+# Code Review Skill
 
-Perform comprehensive code reviews with actionable feedback and severity-based issue reporting.
+Perform comprehensive code reviews with severity-based issue reporting and actionable fixes.
 
 ## When to Use
 
 Use this skill when:
-- Reviewing pull requests
-- Auditing existing code
-- Before major refactoring
-- Onboarding to new codebase
-- Pre-launch quality check
+- Reviewing pull requests before merge
+- Auditing existing code for quality issues
+- Preparing for a major refactor
+- Onboarding to an unfamiliar codebase
+- Running a pre-launch quality check
 
 ---
 
-## How It Works
+## Severity Levels
 
-### Review Framework
-
-```
-┌────────────────────────────────────────────────────────┐
-│                    CODE REVIEW                          │
-├────────────────────────────────────────────────────────┤
-│                                                         │
-│  1. SECURITY       → Vulnerabilities, data exposure    │
-│  2. BUGS           → Logic errors, edge cases          │
-│  3. PERFORMANCE    → Inefficiencies, memory leaks      │
-│  4. MAINTAINABILITY→ Complexity, technical debt        │
-│  5. STYLE          → Conventions, formatting           │
-│                                                         │
-└────────────────────────────────────────────────────────┘
-```
-
-### Severity Levels
-
-| Level | Icon | Action Required | Examples |
-|-------|------|-----------------|----------|
-| **Critical** | 🔴 | Must fix before merge | Security vulnerability, data loss risk |
-| **High** | 🟠 | Should fix before merge | Logic bugs, performance issues |
-| **Medium** | 🟡 | Fix soon, can merge | Code smells, missing tests |
-| **Low** | 🟢 | Nice to have | Style preferences, minor optimizations |
+| Level | Icon | Action | Examples |
+|---|---|---|---|
+| **Critical** | RED | Must fix before merge | Security vulnerability, data loss |
+| **High** | ORANGE | Fix before merge | Logic bug, unhandled error path |
+| **Medium** | YELLOW | Fix soon | Code smell, missing test |
+| **Low** | GREEN | Optional | Style preference, micro-optimization |
 
 ---
 
 ## Review Process
 
-### Step 1: Security Check
+Run all 5 passes below. Report issues grouped by severity — Critical first.
 
-```markdown
-## Security Review
+### Pass 1: Security
 
-### 🔴 Critical Issues
+Check for vulnerabilities that could be exploited:
 
-- **Line 45**: API key hardcoded in source
-  ```javascript
-  const API_KEY = 'sk_live_abc123'; // CRITICAL: Move to env
-  ```
-  **Fix**: Use `process.env.API_KEY`
+- Hardcoded secrets, API keys, or passwords in source
+- SQL/NoSQL injection via unsanitized input
+- XSS — user input rendered as HTML without escaping
+- IDOR — operations on IDs without ownership check
+- Missing authentication on protected routes
+- Sensitive data logged or returned in responses
 
-### 🟠 High Issues
+### Pass 2: Bugs
 
-- **Line 78**: SQL query vulnerable to injection
-  ```javascript
-  db.query(`SELECT * FROM users WHERE id = '${userId}'`);
-  ```
-  **Fix**: Use parameterized query: `db.query('SELECT * FROM users WHERE id = $1', [userId])`
+Check for code that will fail at runtime or in edge cases:
 
-### ✅ Passed Checks
-- No eval() usage
-- Input validation present
-- CORS properly configured
-```
+- Uncaught exceptions and unhandled promise rejections
+- Off-by-one errors in loops and array access
+- Null/undefined not guarded before property access
+- Race conditions in async code
+- Incorrect comparison (`==` vs `===`, reference vs value)
+- Functions that silently return wrong types
 
-### Step 2: Bug Detection
+### Pass 3: Performance
 
-```markdown
-## Bug Analysis
+Check for code that will be slow or expensive:
 
-### 🔴 Critical Bugs
+- N+1 queries (fetching in a loop — batch instead)
+- Missing database indexes on filtered/sorted columns
+- Expensive computation in a hot path (move outside loop or memoize)
+- Unbounded queries (missing LIMIT)
+- Unnecessary re-renders in React components
 
-- **Line 123**: Null pointer exception
-  ```javascript
-  const name = user.profile.name; // user.profile can be null
-  ```
-  **Fix**: `const name = user?.profile?.name ?? 'Unknown';`
+### Pass 4: Maintainability
 
-### 🟠 High Bugs
+Check for code that will be hard to change:
 
-- **Line 89**: Race condition in state update
-  ```javascript
-  setCount(count + 1); // Uses stale state in async
-  setCount(count + 1);
-  ```
-  **Fix**: `setCount(prev => prev + 2);`
+- Functions longer than ~40 lines (split responsibility)
+- Magic numbers without explanation (`100` vs `const MAX_RETRIES = 100`)
+- Deep nesting (flatten with early returns)
+- Duplicate logic that should be extracted
+- Missing types on public function signatures
 
-### 🟡 Medium Bugs
+### Pass 5: Style and Conventions
 
-- **Line 156**: Error not handled
-  ```javascript
-  const data = await fetch(url); // No try-catch
-  ```
-  **Fix**: Wrap in try-catch with appropriate error handling
-```
+Check for inconsistency with the codebase:
 
-### Step 3: Performance Review
-
-```markdown
-## Performance Analysis
-
-### 🟠 High Issues
-
-- **Line 34**: N+1 query problem
-  ```javascript
-  const users = await getUsers();
-  for (const user of users) {
-    user.orders = await getOrdersForUser(user.id); // N queries!
-  }
-  ```
-  **Fix**: Batch fetch with `getOrdersForUsers(userIds)`
-
-### 🟡 Medium Issues
-
-- **Line 67**: Expensive computation in render
-  ```javascript
-  function Component({ items }) {
-    const sorted = items.sort((a, b) => a.date - b.date); // Every render!
-  ```
-  **Fix**: Use `useMemo(() => items.sort(...), [items])`
-
-### 🟢 Low Issues
-
-- **Line 99**: Could use more efficient algorithm
-  - Current: O(n²) nested loops
-  - Suggested: O(n) with hash map lookup
-```
-
-### Step 4: Maintainability
-
-```markdown
-## Maintainability Review
-
-### 🟡 Medium Issues
-
-- **Lines 45-120**: Function too long (75 lines)
-  - **Recommendation**: Split into smaller functions
-  - Suggested breakdown:
-    - `validateInput()` (lines 45-65)
-    - `processData()` (lines 66-95)
-    - `formatOutput()` (lines 96-120)
-
-- **Line 34**: Magic number
-  ```javascript
-  if (users.length > 100) { // What is 100?
-  ```
-  **Fix**: `const MAX_USERS = 100; if (users.length > MAX_USERS)`
-
-### 🟢 Low Issues
-
-- **Line 89**: Consider extracting to constant
-- **Line 145**: Comment could be clearer
-```
-
-### Step 5: Style & Conventions
-
-```markdown
-## Style Review
-
-### 🟢 Suggestions
-
-- **Line 12**: Prefer `const` over `let` (value never reassigned)
-- **Line 45**: Inconsistent naming: `user_data` vs `userData`
-- **Line 78**: Missing trailing comma in object
-- **Line 99**: Line exceeds 100 characters
-
-### ✅ Conventions Followed
-- Consistent indentation (2 spaces)
-- Proper semicolon usage
-- Meaningful variable names
-- Small function sizes (mostly)
-```
+- Naming conventions (`camelCase` vs `snake_case`)
+- Import organization
+- Inconsistent error handling patterns
+- Missing or misleading comments on non-obvious logic
 
 ---
 
-## Review Output Template
+## Output Format
 
-```markdown
-# Code Review: [File/PR Name]
+Structure the review report as follows:
+
+```
+# Code Review: [File or PR Name]
 
 ## Summary
-- **Files Reviewed**: 5
-- **Lines Changed**: 234
-- **Issues Found**: 12
-- **Tests**: 3 new, 2 modified
+- Files reviewed: N
+- Issues found: N (X critical, X high, X medium, X low)
+- Tests: N new, N modified
+- Verdict: APPROVE / REQUEST CHANGES
 
-## Verdict: 🟡 CHANGES REQUESTED
+## Critical Issues
+### [Issue title] — Line N
+**Problem:** [What is wrong]
+**Fix:** [What to change]
 
-The code is generally well-structured but has several issues that should be addressed before merging.
+## High Issues
+...
 
-## Critical Issues (1)
-- 🔴 API key exposed in frontend code [security.ts:45]
-
-## High Priority (3)
-- 🟠 SQL injection vulnerability [db.ts:78]
-- 🟠 Race condition in payment handler [checkout.ts:123]
-- 🟠 N+1 query in user loading [users.ts:34]
-
-## Medium Priority (5)
-- 🟡 Missing error handling [api.ts:89]
-- 🟡 Function too complex (cyclomatic complexity: 15) [process.ts:45]
-- 🟡 Missing unit tests for edge cases
-- 🟡 Magic numbers should be constants
-- 🟡 Inconsistent async/await patterns
-
-## Low Priority (3)
-- 🟢 Could use more descriptive variable names
-- 🟢 Consider extracting reusable utility
-- 🟢 Minor style inconsistencies
-
-## Positive Observations ✨
-- Good separation of concerns
-- Comprehensive input validation
-- Clear function naming
-- Well-documented public APIs
-
-## Recommended Actions
-1. [ ] Fix critical security issue immediately
-2. [ ] Address high-priority bugs before merge
-3. [ ] Add tests for uncovered edge cases
-4. [ ] Consider refactoring large functions
-
----
-Reviewed by: [Your Name]
-Date: [Date]
+## Passed Checks
+- [x] No hardcoded secrets
+- [x] Input validation present
+- [x] Error handling covers main paths
 ```
 
 ---
 
-## Checklist for Reviewers
+## Output Deliverables
 
-```markdown
-### Before Starting
-- [ ] Understand the purpose of the changes
-- [ ] Check related issues/tickets
-- [ ] Review test coverage report
-
-### During Review
-- [ ] Check all modified files
-- [ ] Run tests locally if possible
-- [ ] Look for security issues
-- [ ] Verify error handling
-- [ ] Check edge cases
-- [ ] Assess performance impact
-- [ ] Review test quality
-
-### After Review
-- [ ] Summarize findings clearly
-- [ ] Prioritize issues by severity
-- [ ] Suggest specific fixes
-- [ ] Acknowledge good work
-- [ ] Be constructive and respectful
-```
-
----
-
-## Output
-
-Deliverables:
-1. Severity-categorized issue list
-2. Specific fix recommendations
-3. Line-by-line annotations
-4. Overall verdict with action items
-5. Positive feedback on good practices
-]]>
+1. Structured report grouped by severity
+2. Specific line references for each issue
+3. Concrete fix for each Critical and High issue
+4. List of passed checks
+5. Final verdict: APPROVE or REQUEST CHANGES
