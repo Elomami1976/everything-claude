@@ -1,0 +1,218 @@
+<![CDATA[{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "everything-claude-hooks",
+  "version": "1.0.0",
+  "description": "Lifecycle hooks for the everything-claude toolkit",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "name": "security-check",
+        "description": "Verify no sensitive data exposure before tool execution",
+        "tools": ["write_file", "bash", "run_in_terminal"],
+        "action": "validate",
+        "rules": [
+          {
+            "type": "regex-deny",
+            "pattern": "(api[_-]?key|password|secret|token)\\s*[:=]\\s*['\"][^'\"]+['\"]",
+            "message": "Detected potential hardcoded secret. Use environment variables instead."
+          },
+          {
+            "type": "regex-deny",
+            "pattern": "sk_live_[a-zA-Z0-9]{24,}",
+            "message": "Stripe live secret key detected. Never commit live keys to code."
+          },
+          {
+            "type": "regex-deny",
+            "pattern": "AKIA[0-9A-Z]{16}",
+            "message": "AWS access key detected. Use IAM roles or environment variables."
+          }
+        ]
+      },
+      {
+        "name": "file-backup",
+        "description": "Create backup before modifying existing files",
+        "tools": ["write_file", "replace_string_in_file"],
+        "action": "backup",
+        "config": {
+          "backup_dir": ".claude-backups",
+          "max_backups": 5,
+          "skip_patterns": ["node_modules/**", ".git/**", "*.lock"]
+        }
+      }
+    ],
+    "PostToolUse": [
+      {
+        "name": "lint-check",
+        "description": "Run linter after code modifications",
+        "tools": ["write_file", "replace_string_in_file"],
+        "action": "run",
+        "condition": {
+          "file_extensions": [".js", ".ts", ".jsx", ".tsx"]
+        },
+        "command": "npx eslint {file} --fix --quiet || true"
+      },
+      {
+        "name": "format-check",
+        "description": "Format code after modifications",
+        "tools": ["write_file", "replace_string_in_file"],
+        "action": "run",
+        "condition": {
+          "file_extensions": [".js", ".ts", ".jsx", ".tsx", ".json", ".css", ".md"]
+        },
+        "command": "npx prettier --write {file} 2>/dev/null || true"
+      },
+      {
+        "name": "type-check",
+        "description": "Run TypeScript type checking after TS file changes",
+        "tools": ["write_file", "replace_string_in_file"],
+        "action": "run",
+        "condition": {
+          "file_extensions": [".ts", ".tsx"]
+        },
+        "command": "npx tsc --noEmit {file} 2>/dev/null || true"
+      }
+    ],
+    "SessionStart": [
+      {
+        "name": "project-detect",
+        "description": "Detect project type and set appropriate context",
+        "action": "detect",
+        "detectors": [
+          {
+            "files": ["manifest.json"],
+            "context": {
+              "type": "chrome-extension",
+              "rules": ["rules/javascript/chrome-extension.md"],
+              "agent": "agents/chrome-ext-agent.md"
+            }
+          },
+          {
+            "files": ["next.config.js", "next.config.mjs"],
+            "context": {
+              "type": "nextjs-app",
+              "rules": ["rules/typescript/react.md"],
+              "agent": "agents/saas-agent.md"
+            }
+          },
+          {
+            "files": ["requirements.txt", "pyproject.toml"],
+            "context": {
+              "type": "python-project",
+              "rules": ["rules/python/general.md"]
+            }
+          },
+          {
+            "files": ["index.html"],
+            "no_files": ["package.json"],
+            "context": {
+              "type": "web-tool",
+              "rules": ["rules/javascript/general.md"],
+              "agent": "agents/web-tool-agent.md"
+            }
+          }
+        ]
+      },
+      {
+        "name": "load-memory",
+        "description": "Load project-specific context from memory files",
+        "action": "load",
+        "files": [
+          ".claude/memory.md",
+          ".claude/context.md",
+          "CLAUDE.md"
+        ]
+      },
+      {
+        "name": "check-gitignore",
+        "description": "Verify .env files are gitignored",
+        "action": "validate",
+        "rules": [
+          {
+            "type": "file-check",
+            "file": ".gitignore",
+            "contains": [".env", ".env.local", ".env*.local"],
+            "warning": "Consider adding .env files to .gitignore"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "name": "session-summary",
+        "description": "Generate summary of session changes",
+        "action": "summarize",
+        "output": {
+          "format": "markdown",
+          "include": ["files_created", "files_modified", "commands_run"],
+          "destination": ".claude/session-{timestamp}.md"
+        }
+      },
+      {
+        "name": "commit-reminder",
+        "description": "Remind to commit changes if git is dirty",
+        "action": "check",
+        "condition": "git status --porcelain | grep -q .",
+        "message": "You have uncommitted changes. Consider running:\n  git add .\n  git commit -m 'feat: {summary}'"
+      }
+    ],
+    "BeforeCommit": [
+      {
+        "name": "secrets-scan",
+        "description": "Scan for secrets before commit",
+        "action": "run",
+        "command": "npx secretlint --secretlintrc .secretlintrc.json staged",
+        "on_fail": "block"
+      },
+      {
+        "name": "test-run",
+        "description": "Run tests before commit",
+        "action": "run",
+        "command": "npm test 2>/dev/null || yarn test 2>/dev/null || echo 'No tests configured'",
+        "on_fail": "warn"
+      }
+    ],
+    "OnError": [
+      {
+        "name": "error-context",
+        "description": "Capture error context for debugging",
+        "action": "capture",
+        "include": [
+          "last_command",
+          "exit_code",
+          "stderr",
+          "recent_files",
+          "environment"
+        ],
+        "output": ".claude/errors/{timestamp}.json"
+      },
+      {
+        "name": "auto-fix-attempt",
+        "description": "Attempt common automatic fixes",
+        "action": "fix",
+        "patterns": [
+          {
+            "error": "Module not found",
+            "fix": "npm install"
+          },
+          {
+            "error": "ENOENT: no such file or directory",
+            "fix": "mkdir -p {dirname}"
+          },
+          {
+            "error": "SyntaxError: Unexpected token",
+            "fix": "npx eslint --fix {file}"
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "enabled": true,
+    "verbose": false,
+    "parallel": false,
+    "timeout_ms": 30000,
+    "ignore_errors": false,
+    "log_file": ".claude/hooks.log"
+  }
+}
+]]>
