@@ -259,18 +259,10 @@ LOG_LEVEL=info
 
 ## System Overview
 
-\`\`\`
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Client    │────▶│   API       │────▶│  Database   │
-│   (React)   │     │   (Node)    │     │  (Postgres) │
-└─────────────┘     └─────────────┘     └─────────────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │   Redis     │
-                    │   (Cache)   │
-                    └─────────────┘
-\`\`\`
+Client (React) ---> API (Node) ---> Database (Postgres)
+                          |
+                          v
+                     Redis (Cache)
 
 ## Key Decisions
 
