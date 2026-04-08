@@ -1,4 +1,4 @@
-<![CDATA[{
+{
   "name": "everything-claude",
   "version": "1.0.0",
   "description": "Agent harness performance optimization kit for Claude Code, Cursor, OpenCode, and Codex",
@@ -37,4 +37,3 @@
     "node": ">=18.0.0"
   }
 }
-]]>

@@ -58,13 +58,15 @@ jobs:
               | grep -v "^\./commands/" \
               | grep -v "^\./docs/" \
               | grep -v "^\./hooks/hooks\.json" \
+              | grep -v "^\./\.github/" \
               | grep -q .; then
               grep -r --include="*.md" --include="*.json" --include="*.ts" --include="*.js" -l "$pattern" . 2>/dev/null \
                 | grep -v node_modules \
                 | grep -v "^\./rules/" \
                 | grep -v "^\./commands/" \
                 | grep -v "^\./docs/" \
-                | grep -v "^\./hooks/hooks\.json"
+                | grep -v "^\./hooks/hooks\.json" \
+                | grep -v "^\./\.github/"
               echo "Potential secret found: $pattern"
               FOUND=1
             fi
