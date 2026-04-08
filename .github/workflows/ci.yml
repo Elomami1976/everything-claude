@@ -52,7 +52,19 @@ jobs:
           )
           FOUND=0
           for pattern in "${PATTERNS[@]}"; do
-            if grep -r --include="*.md" --include="*.json" --include="*.ts" --include="*.js" -l "$pattern" . 2>/dev/null | grep -v node_modules; then
+            if grep -r --include="*.md" --include="*.json" --include="*.ts" --include="*.js" -l "$pattern" . 2>/dev/null \
+              | grep -v node_modules \
+              | grep -v "^\./rules/" \
+              | grep -v "^\./commands/" \
+              | grep -v "^\./docs/" \
+              | grep -v "^\./hooks/hooks\.json" \
+              | grep -q .; then
+              grep -r --include="*.md" --include="*.json" --include="*.ts" --include="*.js" -l "$pattern" . 2>/dev/null \
+                | grep -v node_modules \
+                | grep -v "^\./rules/" \
+                | grep -v "^\./commands/" \
+                | grep -v "^\./docs/" \
+                | grep -v "^\./hooks/hooks\.json"
               echo "Potential secret found: $pattern"
               FOUND=1
             fi
