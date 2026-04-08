@@ -1,11 +1,17 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/v1.1.0-release-blue?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/github/license/Elomami1976/everything-claude?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/github/stars/Elomami1976/everything-claude?style=for-the-badge" alt="Stars">
-  <img src="https://github.com/Elomami1976/everything-claude/actions/workflows/ci.yml/badge.svg" alt="CI">
+  <img src="assets/logo.svg" alt="everything-claude" width="800" />
 </p>
 
-<h1 align="center">🧠 everything-claude</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.1.0-a78bfa?style=for-the-badge&labelColor=0d1117" alt="Version">
+  <img src="https://img.shields.io/github/license/Elomami1976/everything-claude?style=for-the-badge&color=60a5fa&labelColor=0d1117" alt="License">
+  <img src="https://img.shields.io/github/stars/Elomami1976/everything-claude?style=for-the-badge&color=fbbf24&labelColor=0d1117" alt="Stars">
+  <img src="https://img.shields.io/github/forks/Elomami1976/everything-claude?style=for-the-badge&color=34d399&labelColor=0d1117" alt="Forks">
+  <img src="https://img.shields.io/github/actions/workflow/status/Elomami1976/everything-claude/ci.yml?style=for-the-badge&label=CI&labelColor=0d1117" alt="CI">
+  <img src="https://img.shields.io/badge/platform-Claude%20%7C%20Cursor%20%7C%20Codex-a78bfa?style=for-the-badge&labelColor=0d1117" alt="Platform">
+</p>
+
+<h1 align="center">everything-claude</h1>
 
 <p align="center">
   <strong>The Ultimate Agent Harness Performance Optimization Kit</strong>
